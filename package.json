@@ -1,0 +1,26 @@
+{
+  "name": "threejsapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.9",
+    "gsap": "^3.11.5",
+    "mddir": "^1.1.1",
+    "pinia": "^2.0.32",
+    "three": "^0.151.3",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "less": "^4.1.3",
+    "unplugin-auto-import": "^0.15.2",
+    "unplugin-vue-components": "^0.24.1",
+    "vite": "^4.1.4"
+  }
+}
