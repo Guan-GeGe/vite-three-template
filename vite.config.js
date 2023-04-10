@@ -28,6 +28,8 @@ export default defineConfig({
             // 命名导入
             "OrbitControls", // import { useMouse } from '@vueuse/core',
           ],
+          "three/examples/jsm/loaders/RGBELoader": ["RGBELoader"],
+          "three/examples/jsm/loaders/GLTFLoader": ["GLTFLoader"],
           "@/three/index.js": [
             "scene",
             "camera",
@@ -38,6 +40,7 @@ export default defineConfig({
             "animate",
             "light",
             "createMesh",
+            "gsap",
           ],
         },
       ],

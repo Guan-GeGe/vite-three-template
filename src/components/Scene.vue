@@ -20,17 +20,14 @@ const sceneDiv = ref(null)
 scene.add(camera);
 
 // 创建平面
-const geometry = new THREE.PlaneGeometry(1, 1, 64, 64);
-const material = new THREE.MeshBasicMaterial()
-const plane = new THREE.Mesh(geometry, material);
-scene.add(plane);
+createMesh()
 
 
-scene.add(light);
+// scene.add(light);
 // 直线光源
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-directionalLight.castShadow = true;
-scene.add(directionalLight);
+// const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+// directionalLight.castShadow = true;
+// scene.add(directionalLight);
 
 
 // 添加坐标轴辅助器

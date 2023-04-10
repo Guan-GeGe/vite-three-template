@@ -8,6 +8,7 @@ import gui from "./gui";
 import animate from "./animate";
 import light from "./light";
 import createMesh from "./createMesh";
+import gsap from "gsap";
 export {
   scene,
   camera,
@@ -18,4 +19,5 @@ export {
   animate,
   light,
   createMesh,
+  gsap,
 };

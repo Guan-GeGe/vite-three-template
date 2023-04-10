@@ -5,7 +5,9 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const GLTFLoader: typeof import('three/examples/jsm/loaders/GLTFLoader')['GLTFLoader']
   const OrbitControls: typeof import('three/examples/jsm/controls/OrbitControls')['OrbitControls']
+  const RGBELoader: typeof import('three/examples/jsm/loaders/RGBELoader')['RGBELoader']
   const THREE: typeof import('three')
   const animate: typeof import('@/three/index.js')['animate']
   const axesHelper: typeof import('@/three/index.js')['axesHelper']
@@ -21,6 +23,7 @@ declare global {
   const effectScope: typeof import('vue')['effectScope']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const gsap: typeof import('@/three/index.js')['gsap']
   const gui: typeof import('@/three/index.js')['gui']
   const h: typeof import('vue')['h']
   const inject: typeof import('vue')['inject']
