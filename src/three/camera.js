@@ -6,6 +6,6 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 // 设计相机位置
-camera.position.set(0, 0, 3);
+camera.position.set(0, 15, 10);
 
 export default camera;
