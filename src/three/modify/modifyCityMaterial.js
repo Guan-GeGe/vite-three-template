@@ -1,14 +1,14 @@
 import gsap from "gsap";
 export default function modifyCityMaterial(mesh) {
   mesh.material.onBeforeCompile = (shader) => {
-    console.log(shader.vertexShader);
+    // console.log(shader.vertexShader);
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <dithering_fragment>",
       `#include <dithering_fragment>
         //#end#
         `
     );
-    console.log(shader.fragmentShader);
+    // console.log(shader.fragmentShader);
     // 添加城市模型渐变效果
     addGradColor(mesh, shader);
     // 添加光圈发现效果

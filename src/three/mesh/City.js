@@ -1,6 +1,7 @@
 import modifyCityMaterial from "../modify/modifyCityMaterial";
 import FlyLine from "./FlyLine";
 import FlyLineShader from "./FlyLineShader";
+import meshLine from "./MeshLine";
 
 export default function createCity() {
   const gltfLoader = new GLTFLoader();
@@ -13,6 +14,15 @@ export default function createCity() {
         });
         // 创建光圈效果
         modifyCityMaterial(item);
+        // 创建建筑线框效果
+        console.log(item);
+        if ((item.name = "Layerbuildings")) {
+          const meshline = new meshLine(item.geometry);
+          // 创建出来的线框是大的，所以我们需要对线框进行调整
+          const size = item.scale.x * 1.001;
+          meshline.mesh.scale.set(size, size, size);
+          scene.add(meshline.mesh);
+        }
       }
     });
     scene.add(gltf.scene);
