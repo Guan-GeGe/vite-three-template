@@ -1,6 +1,7 @@
 import modifyCityMaterial from "../modify/modifyCityMaterial";
 import FlyLine from "./FlyLine";
 import FlyLineShader from "./FlyLineShader";
+import LineRader from "./LineRader";
 import LineWall from "./LineWall";
 import meshLine from "./MeshLine";
 
@@ -37,4 +38,7 @@ export default function createCity() {
   // 创建光墙特效;
   const lineWall = new LineWall();
   scene.add(lineWall.cylinder);
+  // 创建雷达效果
+  const lineRader = new LineRader();
+  scene.add(lineRader.mesh);
 }
