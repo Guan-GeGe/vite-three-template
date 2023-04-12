@@ -1,6 +1,7 @@
 import modifyCityMaterial from "../modify/modifyCityMaterial";
 import FlyLine from "./FlyLine";
 import FlyLineShader from "./FlyLineShader";
+import LineWall from "./LineWall";
 import meshLine from "./MeshLine";
 
 export default function createCity() {
@@ -15,8 +16,8 @@ export default function createCity() {
         // 创建光圈效果
         modifyCityMaterial(item);
         // 创建建筑线框效果
-        console.log(item);
-        if ((item.name = "Layerbuildings")) {
+        console.log(item.name);
+        if (item.name == "Layerbuildings") {
           const meshline = new meshLine(item.geometry);
           // 创建出来的线框是大的，所以我们需要对线框进行调整
           const size = item.scale.x * 1.001;
@@ -33,4 +34,7 @@ export default function createCity() {
   // 使用着色器创建飞线
   const flyLineShader = new FlyLineShader();
   scene.add(flyLineShader.mesh);
+  // 创建光墙特效;
+  const lineWall = new LineWall();
+  scene.add(lineWall.cylinder);
 }
