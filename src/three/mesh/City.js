@@ -1,4 +1,5 @@
 import modifyCityMaterial from "../modify/modifyCityMaterial";
+import AlarmSprite from "./AlarmSprite";
 import FlyLine from "./FlyLine";
 import FlyLineShader from "./FlyLineShader";
 import LineRader from "./LineRader";
@@ -41,4 +42,12 @@ export default function createCity() {
   // 创建雷达效果
   const lineRader = new LineRader();
   scene.add(lineRader.mesh);
+  // 3d警告标识
+  const alarmSprite = new AlarmSprite();
+  const group = new THREE.Group();
+  group.add(alarmSprite.mesh);
+  scene.add(group);
+  alarmSprite.onClick(() => {
+    console.log("警告");
+  });
 }
