@@ -42,6 +42,8 @@ export default defineConfig({
             "createMesh",
             "gsap",
           ],
+          "@/api/api.js": ["getSmartcity", "getSmartcityList"],
+          "@/utils/eventHub": ["eventHub"],
         },
       ],
     }),

@@ -1,7 +1,7 @@
 import vertexShader from "@/shader/LineRader/Vertex.glsl?raw";
 import fragmentShader from "@/shader/LineRader/Fragment.glsl?raw";
 export default class LineRader {
-  constructor() {
+  constructor(position = { x: 0, z: 0 }) {
     this.geometry = new THREE.PlaneGeometry(2, 2);
     // this.material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
     this.shaderMaterial = new THREE.ShaderMaterial({
@@ -21,7 +21,7 @@ export default class LineRader {
 
     this.mesh = new THREE.Mesh(this.geometry, this.shaderMaterial);
     this.mesh.rotation.x = -(Math.PI / 2);
-    this.mesh.position.set(-8, 1, 8);
+    this.mesh.position.set(position.x, 1, position.z);
     this.mesh.geometry.computeBoundingBox();
     gsap.to(this.shaderMaterial.uniforms.uTime, {
       value: 1,
@@ -29,5 +29,11 @@ export default class LineRader {
       repeat: -1,
       ease: "none",
     });
+  }
+  remove() {
+    this.mesh.remove();
+    this.mesh.removeFromParent();
+    this.mesh.geometry.dispose();
+    this.mesh.material.dispose();
   }
 }

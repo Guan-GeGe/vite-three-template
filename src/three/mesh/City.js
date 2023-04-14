@@ -31,23 +31,23 @@ export default function createCity() {
     scene.add(gltf.scene);
   });
   // 创建飞线
-  const flyLine = new FlyLine();
-  scene.add(flyLine.mesh);
+  // const flyLine = new FlyLine();
+  // scene.add(flyLine.mesh);
   // 使用着色器创建飞线
-  const flyLineShader = new FlyLineShader();
-  scene.add(flyLineShader.mesh);
+  // const flyLineShader = new FlyLineShader();
+  // scene.add(flyLineShader.mesh);
   // 创建光墙特效;
-  const lineWall = new LineWall();
-  scene.add(lineWall.cylinder);
+  // const lineWall = new LineWall();
+  // scene.add(lineWall.cylinder);
   // 创建雷达效果
-  const lineRader = new LineRader();
-  scene.add(lineRader.mesh);
+  // const lineRader = new LineRader();
+  // scene.add(lineRader.mesh);
   // 3d警告标识
-  const alarmSprite = new AlarmSprite();
-  const group = new THREE.Group();
-  group.add(alarmSprite.mesh);
-  scene.add(group);
-  alarmSprite.onClick(() => {
-    console.log("警告");
-  });
+  // const alarmSprite = new AlarmSprite();
+  // const group = new THREE.Group();
+  // group.add(alarmSprite.mesh);
+  // scene.add(group);
+  // alarmSprite.onClick(() => {
+  //   console.log("警告");
+  // });
 }

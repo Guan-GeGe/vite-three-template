@@ -6,8 +6,7 @@ const userStore = useUserStore()
 </script>
 
 <template>
-  主页
-  <Scene></Scene>
+  <router-view></router-view>
 </template>
 
 <style scoped lang="less"></style>

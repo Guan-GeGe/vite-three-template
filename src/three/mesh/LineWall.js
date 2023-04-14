@@ -1,8 +1,21 @@
 import vertexShader from "@/shader/LineWall/Vertex.glsl?raw";
 import fragmentShader from "@/shader/LineWall/Fragment.glsl?raw";
+// 光墙
 export default class LineWall {
-  constructor() {
-    this.geometry = new THREE.CylinderGeometry(5, 5, 2, 32, 1, true);
+  constructor(
+    radius = 2,
+    length = 2,
+    position = { x: 0, z: 0 },
+    color = "#ffff00"
+  ) {
+    this.geometry = new THREE.CylinderGeometry(
+      radius,
+      radius,
+      length,
+      32,
+      1,
+      true
+    );
     // this.material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
     this.shaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -17,7 +30,7 @@ export default class LineWall {
     });
 
     this.cylinder = new THREE.Mesh(this.geometry, this.shaderMaterial);
-    this.cylinder.position.set(0, 0.7, 0);
+    this.cylinder.position.set(position.x, 0.7, position.z);
     this.cylinder.geometry.computeBoundingBox();
     // 获取物体的高度差
     let { min, max } = this.cylinder.geometry.boundingBox;
@@ -28,11 +41,17 @@ export default class LineWall {
 
     // 对物体进行缩放
     gsap.to(this.cylinder.scale, {
-      x: 2,
-      z: 2,
-      duration: 3,
+      x: length,
+      z: length,
+      duration: 2,
       repeat: -1,
       yoyo: true,
     });
+  }
+  remove() {
+    this.cylinder.remove();
+    this.cylinder.removeFromParent();
+    this.cylinder.geometry.dispose();
+    this.cylinder.material.dispose();
   }
 }
