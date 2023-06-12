@@ -39,7 +39,7 @@ export default class FlyLineShader {
           value: aSizeArray.length,
         },
         uColor: {
-          value: new THREE.Color(0xffff00),
+          value: new THREE.Color(0x00008b),
         },
       },
       vertexShader: vertexShader,

@@ -8,7 +8,7 @@ import meshLine from "./MeshLine";
 
 export default function createCity() {
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load("./model/city.glb", (gltf) => {
+  gltfLoader.load("./model/shanghaiCity.glb", (gltf) => {
     // traverse()对里面每个的子元素进行执行;
     gltf.scene.traverse((item) => {
       if (item.type == "Mesh") {
@@ -23,6 +23,11 @@ export default function createCity() {
           const meshline = new meshLine(item.geometry);
           // 创建出来的线框是大的，所以我们需要对线框进行调整
           const size = item.scale.x * 1.001;
+          meshline.mesh.position.set(
+            item.position.x,
+            item.position.y,
+            item.position.z
+          );
           meshline.mesh.scale.set(size, size, size);
           scene.add(meshline.mesh);
         }

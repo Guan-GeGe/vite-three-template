@@ -5,6 +5,8 @@ import LineWall from '../three/mesh/LineWall';
 import FlyLineShader from '@/three/mesh/FlyLineShader.js'
 import LineRader from '@/three/mesh/LineRader.js'
 import { ref } from 'vue';
+import eventHub from '../utils/eventHub';
+import gsap from 'gsap'
 const props = defineProps(['listInfos']);
 // console.log(props.listInfos);
 /**
@@ -50,50 +52,90 @@ onMounted(() => {
 let eventListMesh = ref([])
 // 对物体进行动态的生成
 let mapFn = {
-  '火警': (position) => {
+  '火警': (position, i) => {
     // 创建光墙
-
     const lineWall = new LineWall(2, 2, position)
-    scene.add(lineWall.cylinder)
+    lineWall.eventListIndex = i
+    scene.add(lineWall.mesh)
     eventListMesh.value.push(lineWall)
 
   },
-  '治安': (position) => {
+  '治安': (position, i) => {
     // 飞线
     const flyLineShader = new FlyLineShader(position);
+    flyLineShader.eventListIndex = i
+
     scene.add(flyLineShader.mesh);
     eventListMesh.value.push(flyLineShader)
   },
-  '电力': (position) => {
+  '电力': (position, i) => {
     // 雷达
     const lineRader = new LineRader(position)
+    lineRader.eventListIndex = i
+
     scene.add(lineRader.mesh);
     eventListMesh.value.push(lineRader)
   }
 }
 
+eventHub.on('toggleEventClick', (data) => {
+  // console.log(eventListMesh.value);
+  eventListMesh.value.forEach((item, index) => {
+    // console.log(item);
+    if (item.eventListIndex == data.index) {
+      item.mesh.visible = true
+    } else {
+      item.mesh.visible = false
+    }
+  })
+  console.log(props.listInfos[data.index]);
+  let position = {
+    x: props.listInfos[data.index].position.x / 5 - 10,
+    y: 0,
+    z: props.listInfos[data.index].position.y / 5 - 10,
+  }
+  // let positionmesh = eventListMesh.value[data.index].mesh.position
+  // 移动轨道控制器进行视角的控制
+
+
+  // 给移动视角添加动画
+  gsap.to(controls.target, {
+    x: position.x,
+    y: position.y,
+    z: position.z,
+    duration: 1,
+  })
+  // controls.target.set(position.x, position.y, position.z);
+
+  // 写更新，不然更新不到
+  controls.update()
+})
+
 watch(
   () => props.listInfos,
   (val) => {
-    console.log(val);
+    // console.log(val);
     eventListMesh.value.forEach(item => {
       item.remove()
     })
-    props.listInfos.forEach(item => {
-      console.log(item);
+    props.listInfos.forEach((item, i) => {
+      // console.log(item);
       const position = {
         x: item.position.x / 5 - 10,
         z: item.position.y / 5 - 10
       }
       const alarmSprite = new AlarmSprite(item.name, position)
-      console.log(alarmSprite);
+      // console.log(alarmSprite);
       alarmSprite.onClick(() => {
-        console.log('点击事件');
+        // 监听点击事件，用来查看是谁被点击了，来高亮数据
+        eventHub.emit('spriteClick', { event: item, i })
       })
+      // 给每个材质添加一个唯一的标识
+      alarmSprite.eventListIndex = i
       eventListMesh.value.push(alarmSprite)
       // 光墙
       if (mapFn[item.name]) {
-        mapFn[item.name](position)
+        mapFn[item.name](position, i)
 
       }
 

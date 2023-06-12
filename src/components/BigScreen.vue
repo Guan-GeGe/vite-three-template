@@ -1,14 +1,26 @@
 <script setup>
+import eventHub from '../utils/eventHub';
+
 
 const { dataInfo, listInfos } = defineProps(['dataInfo', 'listInfos'])
-console.log(listInfos);
-console.log(dataInfo);
+// console.log(listInfos);
+// console.log(dataInfo);
 
 const imgs = ref({
   火警: 'src/assets/bg/fire.svg',
   电力: 'src/assets/bg/dianli.svg',
   治安: 'src/assets/bg/jingcha.svg'
 })
+let currentActive = ref(null)
+// 接收点击事件
+eventHub.on('spriteClick', (data) => {
+  console.log(data);
+  currentActive.value = data.i
+})
+const toggleEvent = (index) => {
+  currentActive.value = index
+  eventHub.emit('toggleEventClick', { index: index })
+}
 </script>
 
 <template>
@@ -33,7 +45,9 @@ const imgs = ref({
             <span>事件列表</span>
           </h3>
           <ul>
-            <li v-for="(item, index) in listInfos" :key="index">
+            <li v-for="(item, index) in listInfos" :key="index" :class="{
+              active: currentActive == index
+            }" @click="toggleEvent(index)">
               <div>
                 <img class="icon" :src="imgs[item.name]" alt="">
                 <span class="name">{{ item.name }}</span>
@@ -230,6 +244,9 @@ h1 span.time {
 }
 
 
+.cityEvent li.active .time {
+  color: red;
+}
 
 .cityEvent li.active h1 {
   color: red;

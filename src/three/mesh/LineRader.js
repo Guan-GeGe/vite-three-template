@@ -7,7 +7,7 @@ export default class LineRader {
     this.shaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uColor: {
-          value: new THREE.Color(0xffff00),
+          value: new THREE.Color(0x8cf4ff),
         },
         uTime: {
           value: 0,

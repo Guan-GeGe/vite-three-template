@@ -6,7 +6,7 @@ export default class LineWall {
     radius = 2,
     length = 2,
     position = { x: 0, z: 0 },
-    color = "#ffff00"
+    color = "0xd83f2c"
   ) {
     this.geometry = new THREE.CylinderGeometry(
       radius,
@@ -22,6 +22,9 @@ export default class LineWall {
         uHeight: {
           value: 0,
         },
+        uColor: {
+          value: new THREE.Color(color),
+        },
       },
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
@@ -29,18 +32,18 @@ export default class LineWall {
       side: THREE.DoubleSide,
     });
 
-    this.cylinder = new THREE.Mesh(this.geometry, this.shaderMaterial);
-    this.cylinder.position.set(position.x, 0.7, position.z);
-    this.cylinder.geometry.computeBoundingBox();
+    this.mesh = new THREE.Mesh(this.geometry, this.shaderMaterial);
+    this.mesh.position.set(position.x, 0.7, position.z);
+    this.mesh.geometry.computeBoundingBox();
     // 获取物体的高度差
-    let { min, max } = this.cylinder.geometry.boundingBox;
+    let { min, max } = this.mesh.geometry.boundingBox;
     let uHeight = max.y - min.y;
     this.shaderMaterial.uniforms.uHeight = {
       value: uHeight,
     };
 
     // 对物体进行缩放
-    gsap.to(this.cylinder.scale, {
+    gsap.to(this.mesh.scale, {
       x: length,
       z: length,
       duration: 2,
@@ -49,9 +52,9 @@ export default class LineWall {
     });
   }
   remove() {
-    this.cylinder.remove();
-    this.cylinder.removeFromParent();
-    this.cylinder.geometry.dispose();
-    this.cylinder.material.dispose();
+    this.mesh.remove();
+    this.mesh.removeFromParent();
+    this.mesh.geometry.dispose();
+    this.mesh.material.dispose();
   }
 }
